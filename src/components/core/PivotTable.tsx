@@ -263,7 +263,6 @@ export const getAGGridDataSource = (
     onSuccess: (
         execution: Execution.IExecutionResponses,
         columnDefs: IGridHeader[],
-        rowData: IGridRow[],
         resultSpec: AFM.IResultSpec
     ) => void,
     getGridApi: () => any,
@@ -327,7 +326,7 @@ export const getAGGridDataSource = (
                 groupingProvider.processPage(rowData, offset[0], rowAttributeIds);
                 // RAIL-1130: Backend returns incorrectly total: [1, N], when count: [0, N] and offset: [0, N]
                 const lastRow = offset[0] === 0 && count[0] === 0 ? 0 : total[0];
-                onSuccess(execution, columnDefs, rowData, resultSpecUpdated);
+                onSuccess(execution, columnDefs, resultSpecUpdated);
                 successCallback(rowData, lastRow);
                 // set totals
                 getGridApi().setPinnedBottomRowData(rowTotals);
@@ -573,7 +572,6 @@ export class PivotTableInner extends BaseVisualization<IPivotTableInnerProps, IP
         const onSuccess = (
             execution: Execution.IExecutionResponses,
             columnDefs: IGridHeader[],
-            rowData: IGridRow[],
             resultSpec: AFM.IResultSpec
         ) => {
             if (!isEqual(columnDefs, this.state.columnDefs)) {
