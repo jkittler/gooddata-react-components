@@ -1,4 +1,4 @@
-// (C) 2007-2018 GoodData Corporation
+// (C) 2007-2019 GoodData Corporation
 import { AFM, Execution, VisualizationObject } from '@gooddata/typings';
 import {
     ColDef,
@@ -908,10 +908,10 @@ export class PivotTableInner extends BaseVisualization<IPivotTableInnerProps, IP
             { attributes: [], all: [] }
         );
 
-        const i = sortedColumnIndexes.attributes[0] === 0 && sortedColumnIndexes.all.length === 1 ||
-            sortedColumnIndexes.all.length === 0;
-
-        console.log('isSortedByFirstAttibute', resultSpec);
+        const i = sortedColumnIndexes.attributes[0] === 0
+            && sortedColumnIndexes.all.length === 1
+            || sortedColumnIndexes.all.length === 0
+            && (!resultSpec.sorts || resultSpec.sorts.length === 0);
 
         return i;
     }
