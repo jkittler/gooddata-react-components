@@ -906,12 +906,10 @@ export class PivotTableInner extends BaseVisualization<IPivotTableInnerProps, IP
             { attributes: [], all: [] }
         );
 
-        const i = sortedColumnIndexes.attributes[0] === 0
-            && sortedColumnIndexes.all.length === 1
-            || sortedColumnIndexes.all.length === 0
-            && (!resultSpec.sorts || resultSpec.sorts.length === 0);
+        const sortedByFirstAttribute = sortedColumnIndexes.attributes[0] === 0 && sortedColumnIndexes.all.length === 1;
+        const isSorted = sortedColumnIndexes.all.length > 0 || (resultSpec.sorts && resultSpec.sorts.length > 0);
 
-        return i;
+        return sortedByFirstAttribute || !isSorted;
     }
 
     private setContainerRef = (container: HTMLDivElement): void => { this.containerRef = container; };
